@@ -28,7 +28,7 @@ const displayDrinks = (name) => {
                             <p class="card-text mb-1"><span class="fw-bold">Category:</span> ${drink.strCategory}</p>
                             <p class="card-text mb-2"><span class="fw-bold">Instruction:</span> ${drink.strInstructions.slice(0, 15)}...</p>
                             <div class="d-flex justify-content-center gap-2">
-                                <button href="#" onclick="addToGroup('${drink.idDrink}')" class="orange-text orange-border py-1 px-2 rounded text-decoration-none">Select</button>
+                                <button href="#" onclick="addToGroup('${drink.idDrink}')" class="orange-text orange-border py-1 px-2 rounded text-decoration-none">Add to Group</button>
                                 <button href="#" onclick="showDetails('${drink.idDrink}')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="orange-bg text-white border-0 py-1 px-2 rounded text-decoration-none">Details</button>
                             </div>
                         </div>
