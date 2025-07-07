@@ -1,5 +1,5 @@
 const displayDrinks = (name) => {
-    if(name == "") name = "z";
+    if (name == "") name = "z";
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
         .then(res => res.json())
         .then(data => {
@@ -8,7 +8,7 @@ const displayDrinks = (name) => {
             cardContainer.innerHTML = "";
             const drinks = data.drinks;
 
-            if(!drinks){
+            if (!drinks) {
                 const p = document.createElement("p");
                 p.classList = "text-center fs-2";
                 p.style.marginTop = "180px";
@@ -41,23 +41,30 @@ const displayDrinks = (name) => {
 
 const addToGroup = (id) => {
     let count = document.getElementById("drinks-count");
-    count.innerText = parseInt(count.innerText)+1;
+
+    if (parseInt(count.innerText) == 7) {
+        alert("You have already selected maximum amount of drinks");
+        return;
+    }
+
+    count.innerText = parseInt(count.innerText) + 1;
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-    .then(res => res.json())
-    .then(data => {
-        const drink = data.drinks[0];
-        const selectedContainer = document.getElementById("selected-container");
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
+        .then(res => res.json())
+        .then(data => {
+            const drink = data.drinks[0];
+            const selectedContainer = document.getElementById("selected-container");
+            const tr = document.createElement("tr");
+            const num = selectedContainer.children.length + 1;
+            tr.innerHTML = `
             <tr>
-                <td>${count.innerText}</td>
+                <td>${num}</td>
                 <td><img class="rounded-circle" style="width: 40px;" src="${drink.strDrinkThumb}" alt=""></td>
                 <td>${drink.strDrink}</td>
             </tr>
         `;
-        selectedContainer.appendChild(tr);
-    });
+            selectedContainer.appendChild(tr);
+        });
 }
 
 displayDrinks("z");
