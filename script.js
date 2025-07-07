@@ -29,7 +29,7 @@ const displayDrinks = (name) => {
                             <p class="card-text mb-2"><span class="fw-bold">Instruction:</span> ${drink.strInstructions.slice(0, 15)}...</p>
                             <div class="d-flex justify-content-center gap-2">
                                 <button href="#" onclick="addToGroup('${drink.idDrink}')" class="orange-text orange-border py-1 px-2 rounded text-decoration-none">Select</button>
-                                <button href="#" class="orange-bg text-white border-0 py-1 px-2 rounded text-decoration-none">Details</button>
+                                <button href="#" onclick="showDetails('${drink.idDrink}')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="orange-bg text-white border-0 py-1 px-2 rounded text-decoration-none">Details</button>
                             </div>
                         </div>
                     </div>
@@ -67,9 +67,22 @@ const addToGroup = (id) => {
         });
 }
 
-displayDrinks("z");
+const showDetails = (id) => {
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const drink = data.drinks[0];
+            document.getElementById("modal-label").innerText = drink.strDrink;
+            document.getElementById("modal-image").src = drink.strDrinkThumb;
+            document.getElementById("category").innerText = drink.strCategory;
+            document.getElementById("alcoholic").innerText = drink.strAlcoholic;
+            document.getElementById("instruction").innerText = drink.strInstructions;
+        });
+}
 
 const handleSearch = document.getElementById("search-btn").addEventListener("click", () => {
     const searchedText = document.getElementById("search-field").value;
     displayDrinks(searchedText);
 })
+
+displayDrinks("z");
