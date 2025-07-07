@@ -26,10 +26,10 @@ const displayDrinks = (name) => {
                         <div class="card-body">
                             <h5 class="card-title mb-1">${drink.strDrink}</h5>
                             <p class="card-text mb-1"><span class="fw-bold">Category:</span> ${drink.strCategory}</p>
-                            <p class="card-text mb-2"><span class="fw-bold">Instruction:</span> ${drink.strInstructions.slice(0, 50)}...</p>
+                            <p class="card-text mb-2"><span class="fw-bold">Instruction:</span> ${drink.strInstructions.slice(0, 15)}...</p>
                             <div class="d-flex justify-content-center gap-2">
-                                <a href="#" class="orange-text orange-border py-1 px-2 rounded text-decoration-none">Select</a>
-                                <a href="#" class="orange-bg text-white border-0 py-1 px-2 rounded text-decoration-none">Details</a>
+                                <button href="#" onclick="addToGroup('${drink.idDrink}')" class="orange-text orange-border py-1 px-2 rounded text-decoration-none">Select</button>
+                                <button href="#" class="orange-bg text-white border-0 py-1 px-2 rounded text-decoration-none">Details</button>
                             </div>
                         </div>
                     </div>
@@ -37,6 +37,27 @@ const displayDrinks = (name) => {
                 cardContainer.appendChild(div);
             });
         });
+}
+
+const addToGroup = (id) => {
+    let count = document.getElementById("drinks-count");
+    count.innerText = parseInt(count.innerText)+1;
+
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then(res => res.json())
+    .then(data => {
+        const drink = data.drinks[0];
+        const selectedContainer = document.getElementById("selected-container");
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <tr>
+                <td>${count.innerText}</td>
+                <td><img class="rounded-circle" style="width: 40px;" src="${drink.strDrinkThumb}" alt=""></td>
+                <td>${drink.strDrink}</td>
+            </tr>
+        `;
+        selectedContainer.appendChild(tr);
+    });
 }
 
 displayDrinks("z");
