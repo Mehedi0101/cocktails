@@ -1,4 +1,5 @@
 const displayDrinks = (name) => {
+    if(name == "") name = "z";
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
         .then(res => res.json())
         .then(data => {
@@ -18,7 +19,7 @@ const displayDrinks = (name) => {
 
             drinks.forEach(drink => {
                 const div = document.createElement("div");
-                div.classList = "col-4 p-2";
+                div.classList = "col-12 col-sm-6 col-lg-4 p-2";
                 div.innerHTML = `
                     <div class="card">
                         <img src="${drink.strDrinkThumb}" class="card-img-top" alt="...">

@@ -13,21 +13,21 @@
 <body>
     <!-- search section -->
     <div class="d-flex my-5 justify-content-center gap-2">
-        <input id="search-field" class="w-50 p-1 orange-border rounded" type="text">
+        <input id="search-field" class="w-50 p-1 orange-border rounded" type="text" required>
         <input id="search-btn" class="orange-bg text-white border-0 py-1 px-2 rounded" type="submit" value="Search">
     </div>
 
     <!-- main content container -->
-    <div class="container m-auto row">
+    <div class="container m-auto row d-flex flex-column-reverse flex-md-row">
         <!-- coktails container -->
-        <div class="col-9">
+        <div class="col-12 col-md-9">
             <div id="card-container" class="row">
 
             </div>
         </div>
 
         <!-- selected container -->
-        <div class="col-3">
+        <div class="col-12 col-md-3 mb-5">
             <div class="p-2">
                 <h5 class="fw-bold">Selected Items: 5</h5>
                 <div>
